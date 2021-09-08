@@ -11,6 +11,18 @@
     <string name="sunlight">Sunlight</string>
 
     <string name="more_details">More details</string>
+    <string name="rainfall">rainfall</string>
+
+    <string name="precipitations">Precipitations</string>
+    <string name="clouds">Clouds</string>
+
+    <string name="max_temperature">Max Temperature</string>
+    <string name="min_temperature">Min Temperature</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_direction">Wind Direction</string>
+    <string name="visibility">Visibility</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
 
     <string name="measurement_units">Measurement units</string>
 </resources>

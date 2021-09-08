@@ -1,4 +1,4 @@
-package com.nmrc.aldebaran.framework.datasource.network.services
+package com.nmrc.aldebaran.framework.datasource.network.services.googlemaps
 
 import android.annotation.SuppressLint
 import android.app.Activity

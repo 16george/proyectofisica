@@ -19,8 +19,12 @@ object PermissionsE {
         private const val ID_PERMISSION = 12345
 
         fun checkPermissions(activity: Activity, granted: () -> Unit, denied: () -> Unit) {
-            if (check(activity.baseContext, arrayOf(all.ACCESS_COARSE_LOCATION, all.ACCESS_FINE_LOCATION)) &&
-                isLocationEnable(activity))
+            if (check(
+                    activity.baseContext,
+                    arrayOf(all.ACCESS_COARSE_LOCATION, all.ACCESS_FINE_LOCATION)
+                ) &&
+                isLocationEnable(activity)
+            )
                 granted()
             else {
                 denied()
@@ -30,34 +34,16 @@ object PermissionsE {
 
 
         private fun requestPermissions(activity: Activity) {
-            ActivityCompat.requestPermissions(activity, arrayOf(all.ACCESS_COARSE_LOCATION, all.ACCESS_FINE_LOCATION),
-                ID_PERMISSION)
+            ActivityCompat.requestPermissions(
+                activity, arrayOf(all.ACCESS_COARSE_LOCATION, all.ACCESS_FINE_LOCATION),
+                ID_PERMISSION
+            )
         }
 
         private fun isLocationEnable(activity: Activity): Boolean {
             return (activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager).run {
                 isProviderEnabled(LocationManager.GPS_PROVIDER) || isProviderEnabled(LocationManager.NETWORK_PROVIDER)
             }
-        }
-    }
-
-    object Internet {
-
-        private const val ID_PERMISSION = 67891
-
-        fun checkPermissions(activity: Activity, granted: () -> Unit, denied: () -> Unit) {
-            if (check(activity.baseContext, arrayOf(all.INTERNET)))
-                granted()
-            else {
-                denied()
-                requestPermissions(activity)
-            }
-        }
-
-        fun requestPermissions(activity: Activity) {
-            ActivityCompat.requestPermissions(activity, arrayOf(all.INTERNET),
-                ID_PERMISSION
-            )
         }
     }
 
