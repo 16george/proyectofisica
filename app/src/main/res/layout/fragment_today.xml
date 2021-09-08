@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".framework.presentation.fragments.TodayFragment">
+
+    <TextView
+        android:id="@+id/tv_title_today"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/today"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="85dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_today"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp">
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/cpb_temperature"
+                android:layout_width="181dp"
+                android:layout_height="168dp"
+                android:layout_marginStart="8dp"
+                app:cpb_background_progressbar_color="#b6bbd8"
+                app:cpb_background_progressbar_width="5dp"
+                app:cpb_progress="16"
+                app:cpb_progress_direction="to_right"
+                app:cpb_progressbar_color="@color/blue_material"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="true"
+                app:layout_constraintBottom_toTopOf="@+id/cpb_sunlight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_value_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20°C"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cpb_temperature"
+                app:layout_constraintEnd_toEndOf="@+id/cpb_temperature"
+                app:layout_constraintStart_toStartOf="@+id/cpb_temperature"
+                app:layout_constraintTop_toTopOf="@+id/cpb_temperature" />
+
+            <TextView
+                android:id="@+id/tv_value_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19 g/cm3"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cpb_humidity"
+                app:layout_constraintEnd_toEndOf="@+id/cpb_humidity"
+                app:layout_constraintStart_toStartOf="@+id/cpb_humidity"
+                app:layout_constraintTop_toTopOf="@+id/cpb_humidity" />
+
+            <TextView
+                android:id="@+id/tv_value_sunlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50 Cd"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cpb_sunlight"
+                app:layout_constraintEnd_toEndOf="@+id/cpb_sunlight"
+                app:layout_constraintStart_toStartOf="@+id/cpb_sunlight"
+                app:layout_constraintTop_toTopOf="@+id/cpb_sunlight" />
+
+            <TextView
+                android:id="@+id/tv_subtitle_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/temperature"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cpb_temperature" />
+
+            <TextView
+                android:id="@+id/tv_subtitle_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="76dp"
+                android:text="@string/humidity"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cpb_humidity" />
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/cpb_humidity"
+                android:layout_width="181dp"
+                android:layout_height="168dp"
+                android:layout_marginEnd="8dp"
+                app:cpb_background_progressbar_color="#b6bbd8"
+                app:cpb_background_progressbar_width="5dp"
+                app:cpb_progress="10"
+                app:cpb_progress_direction="to_right"
+                app:cpb_progressbar_color="@color/brown_material"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="true"
+                app:layout_constraintBottom_toTopOf="@+id/cpb_sunlight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.881"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:id="@+id/cpb_sunlight"
+                android:layout_width="181dp"
+                android:layout_height="168dp"
+                android:layout_marginTop="320dp"
+                app:cpb_background_progressbar_color="#b6bbd8"
+                app:cpb_background_progressbar_width="5dp"
+                app:cpb_progress="36"
+                app:cpb_progress_direction="to_right"
+                app:cpb_progressbar_color="@color/orange_material"
+                app:cpb_progressbar_width="10dp"
+                app:cpb_round_border="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_subtitle_sunlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/sunlight"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cpb_sunlight" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="32dp"
+                android:text="@string/more_details"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_subtitle_sunlight" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

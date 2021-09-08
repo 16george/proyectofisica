@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">aldebaran</string>
+    <string name="app_name">panconqueso</string>
+
+    <string name="today">TODAY</string>
+    <string name="data">DATA</string>
+    <string name="cultivation_automation">CULTIVATION AUTOMATION</string>
+    <string name="settings">SETTINGS</string>
+
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="sunlight">Sunlight</string>
+
+    <string name="more_details">More details</string>
+
+    <string name="measurement_units">Measurement units</string>
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btn_today"
+        android:title="Today"
+        android:icon="@drawable/ic_today"
+        />
+    <item
+        android:id="@+id/btn_data"
+        android:title="Data"
+        android:icon="@drawable/ic_data"
+        />
+    <item
+        android:id="@+id/btn_automation"
+        android:title="Automation"
+        android:icon="@drawable/ic_automation"
+        />
+    <item
+        android:id="@+id/btn_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        />
+</menu>

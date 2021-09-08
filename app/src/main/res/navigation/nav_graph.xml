@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/btn_today">
+
+    <fragment
+        android:id="@+id/btn_today"
+        android:name="com.nmrc.aldebaran.framework.presentation.fragments.TodayFragment"
+        android:label="fragment_today"
+        tools:layout="@layout/fragment_today" >
+        <action
+            android:id="@+id/action_todayFragment_to_dataFragment"
+            app:destination="@id/btn_data" />
+    </fragment>
+    <fragment
+        android:id="@+id/btn_data"
+        android:name="com.nmrc.aldebaran.framework.presentation.fragments.DataFragment"
+        android:label="fragment_data"
+        tools:layout="@layout/fragment_data" >
+        <action
+            android:id="@+id/action_dataFragment_to_automationFragment"
+            app:destination="@id/btn_automation" />
+    </fragment>
+    <fragment
+        android:id="@+id/btn_automation"
+        android:name="com.nmrc.aldebaran.framework.presentation.fragments.AutomationFragment"
+        android:label="fragment_automation"
+        tools:layout="@layout/fragment_automation" >
+        <action
+            android:id="@+id/action_automationFragment_to_settingsFragment"
+            app:destination="@id/btn_settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/btn_settings"
+        android:name="com.nmrc.aldebaran.framework.presentation.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
