@@ -9,12 +9,14 @@ import androidx.lifecycle.lifecycleScope
 import com.kwabenaberko.openweathermaplib.constant.Languages
 import com.kwabenaberko.openweathermaplib.constant.Units
 import com.nmrc.aldebaran.R
+import com.nmrc.aldebaran.business.data.implementation.DataRealTimeVM
 import com.nmrc.aldebaran.business.data.implementation.UbicationVM
+import com.nmrc.aldebaran.business.domain.model.DataSensor
 import com.nmrc.aldebaran.business.domain.model.Ubication
 import com.nmrc.aldebaran.databinding.FragmentTodayBinding
+import com.nmrc.aldebaran.framework.datasource.network.services.firebase.DBRealTimeService
 import com.nmrc.aldebaran.framework.datasource.network.services.googlemaps.GoogleMapsGET
 import com.nmrc.aldebaran.framework.datasource.network.services.openweather.OpenWeatherGET
-import com.nmrc.aldebaran.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ import kotlinx.coroutines.launch
 class TodayFragment : Fragment(R.layout.fragment_today) {
 
     private val vm: UbicationVM by activityViewModels()
+    private val vm_data: DataRealTimeVM by activityViewModels()
     private val binding: FragmentTodayBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,6 +33,84 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
         loadMap(10)
         onLayerListener()
 
+        /**
+         * GET data from realtime database
+         */
+
+        requesterTemperature()
+        requesterHumidity()
+        requesterSunLight()
+
+        /**
+         * Update UI by ViewModel
+         */
+
+        observableTemperature()
+        observableHumidity()
+        observableSunLight()
+
+    }
+
+    private fun requesterSunLight() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            while (true) {
+                DBRealTimeService.readDataBase(DBRealTimeService.SUNLIGHT) { sunLight ->
+                    vm_data.addSunLight(sunLight as DataSensor.Sunlight)
+                }
+                delay(1000)
+            }
+        }
+    }
+
+    private fun requesterHumidity() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            while (true) {
+                DBRealTimeService.readDataBase(DBRealTimeService.HUMIDITY) { humidity ->
+                    vm_data.addHumidity(humidity as DataSensor.Humidity)
+                }
+                delay(1000)
+            }
+        }
+    }
+
+    private fun requesterTemperature() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            while (true) {
+                DBRealTimeService.readDataBase(DBRealTimeService.TEMPERATURE) { temperature ->
+                    vm_data.addTemperature(temperature as DataSensor.Temperature)
+                }
+                delay(1000)
+            }
+        }
+    }
+
+    private fun observableSunLight() {
+        vm_data.sunlight.observe(viewLifecycleOwner) { sunLight ->
+            with(binding) {
+                cpbSunlight.progress = sunLight.value.toFloat()
+                "${sunLight.value} Lux".also { tvValueSunlight.text = it }
+            }
+
+        }
+    }
+
+    private fun observableHumidity() {
+        vm_data.humidity.observe(viewLifecycleOwner) { humidity ->
+            with(binding) {
+                cpbHumidity.progress = humidity.value.toFloat()
+                "${humidity.value} %".also { tvValueHumidity.text = it }
+            }
+        }
+    }
+
+    private fun observableTemperature() {
+        vm_data.temperature.observe(viewLifecycleOwner) { temperature ->
+            with(binding) {
+                cpbTemperature.progress = temperature.value.toFloat()
+                tvValueTemperature.text = temperature.value.toString()
+                "${temperature.value} °C".also { tvValueTemperature.text = it }
+            }
+        }
     }
 
     private suspend fun requesterOWM(ubication: Ubication) {
@@ -92,7 +173,7 @@ class TodayFragment : Fragment(R.layout.fragment_today) {
                     requesterOWM(ubication)
                     break
                 }
-                toast("Getting last location")
+                //toast("Getting last location")
                 delay(1016)
             }
         }

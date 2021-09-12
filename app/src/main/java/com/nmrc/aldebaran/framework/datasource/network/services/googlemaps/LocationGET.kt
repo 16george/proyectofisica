@@ -7,7 +7,7 @@ import com.google.android.gms.location.LocationServices
 object LocationGET {
 
     @SuppressLint("MissingPermission")
-    fun invoke(activity: Activity, doSomething: (latitude: Double, longitude: Double) -> Unit) {
+    operator fun invoke(activity: Activity, doSomething: (latitude: Double, longitude: Double) -> Unit) {
         LocationServices.getFusedLocationProviderClient(activity).apply {
             lastLocation.addOnCompleteListener { task ->
                 task.result?.let { location ->
