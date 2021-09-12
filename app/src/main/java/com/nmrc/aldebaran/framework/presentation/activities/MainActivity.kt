@@ -63,6 +63,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun confNav() {
         NavigationUI.setupWithNavController(binding.bnvMainNavigation, navController)
+        with(binding.bnvMainNavigation) {
+            itemIconTintList = null
+        }
     }
     private fun requesterSunLight() {
         lifecycleScope.launch(Dispatchers.IO) {

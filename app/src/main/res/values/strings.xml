@@ -24,5 +24,8 @@
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
 
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+
     <string name="measurement_units">Measurement units</string>
 </resources>

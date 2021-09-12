@@ -21,7 +21,7 @@ class LinearSetup(private val context: Context,
         axisRight.isEnabled = false
 
         axisLeft.apply {
-            isEnabled = false
+            isEnabled = true
             axisMinimum = 0f
             //axisMaximum = 11f
         }
