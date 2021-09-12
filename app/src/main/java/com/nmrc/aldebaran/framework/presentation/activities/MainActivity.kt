@@ -9,8 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.nmrc.aldebaran.R
+import com.nmrc.aldebaran.business.data.implementation.DataRealTimeGraphVM
 import com.nmrc.aldebaran.business.data.implementation.UbicationVM
+import com.nmrc.aldebaran.business.domain.model.DataSensor
 import com.nmrc.aldebaran.databinding.ActivityMainBinding
+import com.nmrc.aldebaran.framework.datasource.network.services.firebase.DBRealTimeService
 import com.nmrc.aldebaran.framework.datasource.network.services.googlemaps.LocationGET
 import com.nmrc.aldebaran.util.PermissionsE
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
     private val vm: UbicationVM by viewModels()
+    private val vmData: DataRealTimeGraphVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         confNav()
 
-        // GPS LOCATION
+        /**
+         * GPS LOCATION
+         */
 
         PermissionsE.Location.checkPermissions(this, {
 
@@ -45,9 +51,41 @@ class MainActivity : AppCompatActivity() {
         }, {
             Toast.makeText(this, "PERMISO DENEGADO", Toast.LENGTH_LONG).show()
         })
+
+        /**
+         * GET DATA FROM REALTIME DATABASE
+         */
+
+        requesterSunLight()
+        requesterHumidity()
+        requesterTemperature()
     }
 
     private fun confNav() {
         NavigationUI.setupWithNavController(binding.bnvMainNavigation, navController)
+    }
+    private fun requesterSunLight() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            DBRealTimeService.readDataBase(DBRealTimeService.SUNLIGHT) { sunLight ->
+                vmData.addSunlight(sunLight as DataSensor.Sunlight)
+
+            }
+        }
+    }
+
+    private fun requesterHumidity() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            DBRealTimeService.readDataBase(DBRealTimeService.HUMIDITY) { humidity ->
+                vmData.addHumidity(humidity as DataSensor.Humidity)
+            }
+        }
+    }
+
+    private fun requesterTemperature() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            DBRealTimeService.readDataBase(DBRealTimeService.TEMPERATURE) { temperature ->
+                vmData.addTemperature(temperature as DataSensor.Temperature)
+            }
+        }
     }
 }

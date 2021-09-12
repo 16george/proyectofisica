@@ -25,17 +25,17 @@ object DBRealTimeService {
     fun readDataBase(reference: String, doSomething: (DataSensor) -> Unit) =
         database.getReference(reference).addValueEventListener(object: ValueEventListener {
 
-        override fun onDataChange(snapshot: DataSnapshot) {
-            val value = snapshot.getValue<Double>()!!
-            when(reference) {
-                TEMPERATURE -> doSomething(DataSensor.Temperature(value))
-                HUMIDITY -> doSomething(DataSensor.Humidity(value))
-                SUNLIGHT -> doSomething(DataSensor.Sunlight(value))
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.getValue<Double>()!!
+                when(reference) {
+                    TEMPERATURE -> doSomething(DataSensor.Temperature(value))
+                    HUMIDITY -> doSomething(DataSensor.Humidity(value))
+                    SUNLIGHT -> doSomething(DataSensor.Sunlight(value))
+                }
             }
-        }
 
-        override fun onCancelled(error: DatabaseError) {
-            Log.w(TAG, "Failed to read value.", error.toException())
-        }
-    })
+            override fun onCancelled(error: DatabaseError) {
+                Log.w(TAG, "Failed to read value.", error.toException())
+            }
+        })
 }

@@ -35,7 +35,7 @@ class LinearSetup(private val context: Context,
             setDrawAxisLine(false)
             position = XAxis.XAxisPosition.BOTTOM
 
-            valueFormatter = TimeValueFormatter()
+            //valueFormatter = TimeValueFormatter()
         }
 
         setTouchEnabled(true)

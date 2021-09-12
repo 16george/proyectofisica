@@ -1,21 +1,15 @@
 package com.nmrc.aldebaran.framework.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.data.LineData
 import com.nmrc.aldebaran.R
 import com.nmrc.aldebaran.business.data.implementation.DataRealTimeGraphVM
 import com.nmrc.aldebaran.business.data.implementation.LinearSetup
 import com.nmrc.aldebaran.databinding.FragmentDataBinding
-import com.nmrc.aldebaran.framework.datasource.network.services.firebase.DBRealTimeService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class DataFragment : Fragment(R.layout.fragment_data) {
 
@@ -30,23 +24,13 @@ class DataFragment : Fragment(R.layout.fragment_data) {
 
         setUp()
 
-        lifecycleScope.launch(Dispatchers.IO) {
-            while (true) {
-                DBRealTimeService.readDataBase(DBRealTimeService.TEMPERATURE) {
-                    Log.d("DEBUG", it.value.toString())
-                }
-                delay(1000)
-            }
-        }
-
-
-        /** TEMPERATURE REAL TIME**/
+        /** TEMPERATURE REAL TIME **/
         observableTemperature()
 
-        /** HUMIDITY REAL TIME**/
+        /** HUMIDITY REAL TIME **/
         observableHumidity()
 
-        /** SUNLIGHT REAL TIME**/
+        /** SUNLIGHT REAL TIME **/
         observableSunLight()
 
     }
@@ -56,7 +40,6 @@ class DataFragment : Fragment(R.layout.fragment_data) {
             chartSunLight.styleLineDataSet(lineDataSet)
             with(binding.graphSunlight) {
                 data = LineData(lineDataSet)
-
                 this.invalidate()
             }
         }
@@ -77,7 +60,6 @@ class DataFragment : Fragment(R.layout.fragment_data) {
             chartTemperature.styleLineDataSet(lineDataSet)
             with(binding.graphTemperature) {
                 data = LineData(lineDataSet)
-
                 this.invalidate()
             }
         }
